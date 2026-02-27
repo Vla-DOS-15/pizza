@@ -1,5 +1,25 @@
 {
   "HomePage": {
-    "title": "Вітаємо в Піца Сторі!"
+    "bannerTitle": "Найсмачніша піца в місті",
+    "bannerText": "Замовляй зараз та отримай знижку 10% на перше замовлення!",
+    "orderNow": "Замовити зараз",
+    "categoriesTitle": "Наше меню",
+    "popularTitle": "Найпопулярніші піци",
+    "catPizza": "Піца",
+    "catBurgers": "Бургери",
+    "catDrinks": "Напої",
+    "catNuggets": "Снеки"
+  },
+  "Footer": {
+    "rights": "Усі права захищені",
+    "portfolio": "Портфоліо проєкт.",
+    "terms": "Умови",
+    "privacy": "Конфіденційність"
+  },
+  "Navigation": {
+    "home": "Головна",
+    "menu": "Меню",
+    "cart": "Кошик",
+    "profile": "Профіль"
   }
 }

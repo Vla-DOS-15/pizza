@@ -1,5 +1,25 @@
 {
   "HomePage": {
-    "title": "Welcome to Pizza Store!"
+    "bannerTitle": "Найсмачніша піца в місті",
+    "bannerText": "Замовляй зараз та отримай знижку 10% на перше замовлення!",
+    "orderNow": "Замовити зараз",
+    "categoriesTitle": "Наше меню",
+    "popularTitle": "Найпопулярніші піци",
+    "catPizza": "Піца",
+    "catBurgers": "Бургери",
+    "catDrinks": "Напої",
+    "catNuggets": "Снеки"
+  },
+  "Footer": {
+    "rights": "All rights reserved",
+    "portfolio": "Portfolio project.",
+    "terms": "Terms",
+    "privacy": "Privacy"
+  },
+  "Navigation": {
+    "home": "Home",
+    "menu": "Menu",
+    "cart": "Cart",
+    "profile": "Profile"
   }
 }
