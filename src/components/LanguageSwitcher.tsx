@@ -2,15 +2,7 @@
 
 import { useLocale } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Globe } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 export function LanguageSwitcher() {
   const locale = useLocale();
@@ -18,9 +10,8 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const switchLanguage = (newLocale: string) => {
-    if (locale === newLocale) return;
-
+  const toggleLanguage = () => {
+    const newLocale = locale === "uk" ? "en" : "uk";
     const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`);
 
     const params = searchParams.toString();
@@ -30,27 +21,15 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-full">
-          <Globe className="h-[1.2rem] w-[1.2rem] text-muted-foreground hover:text-foreground transition-colors" />
-          <span className="sr-only">Змінити мову</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[150px]">
-        <DropdownMenuItem
-          onClick={() => switchLanguage("uk")}
-          className={`cursor-pointer ${locale === "uk" ? "font-bold text-primary bg-primary/10" : ""}`}
-        >
-          🇺🇦 Українська (UK)
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => switchLanguage("en")}
-          className={`cursor-pointer ${locale === "en" ? "font-bold text-primary bg-primary/10" : ""}`}
-        >
-          🇬🇧 English (EN)
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button
+      variant="ghost"
+      size="icon"
+      className="rounded-full text-lg w-10 h-10 hover:bg-muted"
+      onClick={toggleLanguage}
+      title={locale === "uk" ? "Switch to English" : "Змінити на українську"}
+    >
+      {locale === "uk" ? "🇺🇦" : "🇬🇧"}
+      <span className="sr-only">Змінити мову</span>
+    </Button>
   );
 }
