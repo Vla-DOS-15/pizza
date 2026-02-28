@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pizza-jet-seven.vercel.app/sitemap.xml
