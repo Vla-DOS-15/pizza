@@ -153,7 +153,7 @@ export function ProductCard({ product }: ProductCardProps) {
               {product.name[locale]}
             </h3>
           </Link>
-          <p className="text-[15px] leading-snug line-clamp-2 text-[#E74C3C] dark:text-muted-foreground font-medium">
+          <p className="text-[15px] leading-snug line-clamp-2 dark:text-muted-foreground font-medium">
             {product.description[locale]}
           </p>
         </div>
@@ -168,8 +168,8 @@ export function ProductCard({ product }: ProductCardProps) {
                     onClick={() => setSelectedVariationIndex(idx)}
                     className={`flex-1 text-sm py-2 px-3 rounded-full font-semibold transition-all ${
                       selectedVariationIndex === idx
-                        ? "bg-white dark:bg-background shadow-sm text-[#D93830]"
-                        : "text-[#D93830]/70 hover:text-[#D93830] dark:text-muted-foreground dark:hover:text-foreground"
+                        ? "bg-white dark:bg-background shadow-sm"
+                        : "dark:text-muted-foreground dark:hover:text-foreground"
                     }`}
                   >
                     {v.size} см
@@ -183,8 +183,8 @@ export function ProductCard({ product }: ProductCardProps) {
                     onClick={() => setSelectedCrustIndex(idx)}
                     className={`flex-1 text-sm py-2 px-3 rounded-full font-semibold transition-all ${
                       selectedCrustIndex === idx
-                        ? "bg-white dark:bg-background shadow-sm text-[#D93830]"
-                        : "text-[#D93830]/70 hover:text-[#D93830] dark:text-muted-foreground dark:hover:text-foreground"
+                        ? "bg-white dark:bg-background shadow-sm"
+                        : "dark:text-muted-foreground dark:hover:text-foreground"
                     }`}
                   >
                     {crust.type === "thin" ? t("crustThin") : t("crustThick")}
@@ -202,8 +202,8 @@ export function ProductCard({ product }: ProductCardProps) {
                   onClick={() => setSelectedVariationIndex(idx)}
                   className={`flex-1 text-sm py-2 px-3 rounded-full font-semibold transition-all ${
                     selectedVariationIndex === idx
-                      ? "bg-white dark:bg-background shadow-sm text-[#D93830]"
-                      : "text-[#D93830]/70 hover:text-[#D93830] dark:text-muted-foreground dark:hover:text-foreground"
+                      ? "bg-white dark:bg-background shadow-sm"
+                      : "dark:text-muted-foreground dark:hover:text-foreground"
                   }`}
                 >
                   {v.volume} л
