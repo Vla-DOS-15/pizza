@@ -33,7 +33,7 @@ export function MobileNav() {
       </Link>
 
       <Link
-        href="#menu"
+        href="/#menu"
         className="flex flex-col items-center justify-center w-full h-full text-muted-foreground hover:text-primary active:text-primary transition-colors"
       >
         <LayoutGrid className="h-5 w-5 mb-1" />

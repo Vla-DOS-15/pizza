@@ -215,7 +215,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </CardContent>
 
       <CardFooter className="p-5 pt-0 md:p-6 md:pt-0 flex items-center justify-between mt-auto">
-        <span className="text-[26px] font-black tracking-tight text-[#4A2015] dark:text-white">
+        <span suppressHydrationWarning className="text-[26px] font-black tracking-tight text-[#4A2015] dark:text-white">
           {formatPrice(currentPrice)}
         </span>
         <Button 
