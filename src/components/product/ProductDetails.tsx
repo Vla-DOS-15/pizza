@@ -1,12 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ShoppingCart, Info, Check } from "lucide-react";
-import { Product, PizzaProduct, DrinkProduct, CartItem, SimpleProduct } from "@/lib/types";
+import {
+  Product,
+  PizzaProduct,
+  DrinkProduct,
+  CartItem,
+  SimpleProduct,
+} from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCartStore } from "@/store/cart";
+import { useTranslations } from "next-intl";
 
 interface ProductDetailsProps {
   product: Product;
@@ -22,13 +30,16 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
   const [selectedCrustIndex, setSelectedCrustIndex] = useState(0);
   const [selectedEdgeIndex, setSelectedEdgeIndex] = useState(0);
 
+  const t = useTranslations("Product");
   const lang = locale as "uk" | "en";
 
   const calculatePrice = () => {
     if (product.category === "burger" || product.category === "nuggets") {
       return (product as SimpleProduct).price;
     }
-    let total = (product as PizzaProduct | DrinkProduct).variations[selectedVariationIndex].price;
+    let total = (product as PizzaProduct | DrinkProduct).variations[
+      selectedVariationIndex
+    ].price;
     if (product.category === "pizza") {
       const pizza = product as PizzaProduct;
       total += pizza.allowedCrusts[selectedCrustIndex].price;
@@ -79,18 +90,17 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
         onClick={() => router.back()}
       >
         <ChevronLeft className="w-5 h-5 mr-1" />
-        {lang === "uk" ? "Назад до меню" : "Back to menu"}
+        {t("backToMenu")}
       </Button>
 
       <div className="flex flex-col md:flex-row gap-12">
-        <div className="w-full md:w-1/2 flex items-center justify-center bg-muted/20 rounded-3xl p-8 border border-border">
-          <div className="relative w-full aspect-square max-w-[500px]">
-            <div className="absolute inset-0 bg-primary/10 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(239,68,68,0.1)]">
-              <span className="text-muted-foreground font-mono text-sm">
-                {product.imageUrl}
-              </span>
-            </div>
-          </div>
+        <div className="relative w-full md:w-1/2 aspect-square bg-muted/20 rounded-3xl border border-border overflow-hidden">
+          <Image
+            src={product.imageUrl}
+            alt={product.name[lang]}
+            fill
+            className="object-cover hover:scale-105 transition-transform duration-500"
+          />
         </div>
 
         <div className="w-full md:w-1/2 flex flex-col">
@@ -108,7 +118,9 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
                 <div className="bg-muted/30 p-4 rounded-2xl border border-border">
                   <div className="flex items-center gap-2 mb-2">
                     <Info className="w-4 h-4 text-primary" />
-                    <span className="font-semibold text-sm">Склад:</span>
+                    <span className="font-semibold text-sm">
+                      {t("ingredients")}
+                    </span>
                   </div>
                   <p className="text-sm text-muted-foreground">
                     {(product as PizzaProduct).defaultIngredients
@@ -117,7 +129,7 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-bold mb-3">Розмір</h3>
+                  <h3 className="font-bold mb-3">{t("size")}</h3>
                   <div className="flex flex-wrap gap-3">
                     {(product as PizzaProduct).variations.map((v, idx) => (
                       <Button
@@ -137,7 +149,7 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-bold mb-3">Бортик</h3>
+                  <h3 className="font-bold mb-3">{t("crust")}</h3>
                   <div className="flex flex-wrap gap-3">
                     {(product as PizzaProduct).allowedEdges.map((edge, idx) => (
                       <Button
@@ -158,7 +170,7 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
 
             {product.category === "drinks" && (
               <div>
-                <h3 className="font-bold mb-3">Об'єм</h3>
+                <h3 className="font-bold mb-3">{t("volume")}</h3>
                 <div className="flex flex-wrap gap-3">
                   {(product as DrinkProduct).variations.map((v, idx) => (
                     <Button
@@ -179,7 +191,9 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
 
           <div className="mt-12 pt-6 border-t border-border flex items-center justify-between">
             <div className="flex flex-col">
-              <span className="text-sm text-muted-foreground">Разом:</span>
+              <span className="text-sm text-muted-foreground">
+                {t("total")}
+              </span>
               <span className="text-4xl font-black">{totalPrice} ₴</span>
             </div>
 
@@ -190,12 +204,11 @@ export function ProductDetails({ product, locale }: ProductDetailsProps) {
             >
               {isAdded ? (
                 <>
-                  <Check className="w-5 h-5" /> Додано
+                  <Check className="w-5 h-5" /> {t("added")}
                 </>
               ) : (
                 <>
-                  <ShoppingCart className="w-5 h-5" />{" "}
-                  {lang === "uk" ? "В кошик" : "Add to Cart"}
+                  <ShoppingCart className="w-5 h-5" /> {t("addToCart")}
                 </>
               )}
             </Button>
