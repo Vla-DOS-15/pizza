@@ -3,6 +3,7 @@ import { PRODUCTS } from "@/lib/data";
 import { ProductCategory, Product, PizzaProduct } from "@/lib/types";
 import { ProductCard } from "@/components/product/ProductCard";
 import { CategoryFilters } from "@/components/product/CategoryFilters";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   params: Promise<{ category: string; locale: string }>;
@@ -19,6 +20,8 @@ const validCategories: ProductCategory[] = [
 export default async function CategoryPage({ params, searchParams }: Props) {
   const { category, locale } = await params;
   const resolvedSearchParams = await searchParams;
+  const t = await getTranslations("Product");
+  const tHome = await getTranslations("HomePage");
 
   if (!validCategories.includes(category as ProductCategory)) {
     notFound();
@@ -64,9 +67,9 @@ export default async function CategoryPage({ params, searchParams }: Props) {
       <CategoryFilters category={category} locale={locale} />
       <main className="flex-1">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold capitalize">{category}</h1>
+          <h1 className="text-3xl font-bold capitalize">{tHome(category === "pizza" ? "catPizza" : category === "burger" ? "catBurgers" : category === "drinks" ? "catDrinks" : category === "nuggets" ? "catNuggets" : category)}</h1>
           <span className="text-muted-foreground text-sm">
-            Знайдено: {categoryProducts.length}
+            {t("found")} {categoryProducts.length}
           </span>
         </div>
 
@@ -78,9 +81,9 @@ export default async function CategoryPage({ params, searchParams }: Props) {
           </div>
         ) : (
           <div className="text-center py-20 bg-muted/30 rounded-2xl border border-dashed border-border">
-            <h3 className="text-xl font-bold mb-2">Нічого не знайдено</h3>
+            <h3 className="text-xl font-bold mb-2">{t("nothingFound")}</h3>
             <p className="text-muted-foreground">
-              Спробуйте змінити фільтри або скинути їх.
+              {t("tryChangeFilters")}
             </p>
           </div>
         )}

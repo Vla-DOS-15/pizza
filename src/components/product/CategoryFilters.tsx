@@ -5,6 +5,7 @@ import { ALL_INGREDIENTS_LIST } from "@/lib/data";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import {
   Sheet,
   SheetContent,
@@ -23,6 +24,7 @@ export function CategoryFilters({ category, locale }: CategoryFiltersProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const t = useTranslations("Product");
 
   const currentSort = searchParams.get("sort") || "popular";
   const currentIngredients =
@@ -61,25 +63,25 @@ export function CategoryFilters({ category, locale }: CategoryFiltersProps) {
   const FilterContent = () => (
     <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-bold mb-4">Сортування</h2>
+        <h2 className="text-lg font-bold mb-4">{t("sortTitle")}</h2>
         <select
           value={currentSort}
           onChange={handleSortChange}
           className="w-full border-border bg-background text-foreground rounded-lg p-2 border outline-ring"
         >
-          <option value="popular">За популярністю</option>
-          <option value="price_asc">Від дешевих до дорогих</option>
-          <option value="price_desc">Від дорогих до дешевих</option>
+          <option value="popular">{t("sortPopular")}</option>
+          <option value="price_asc">{t("sortPriceAsc")}</option>
+          <option value="price_desc">{t("sortPriceDesc")}</option>
         </select>
       </div>
 
       {category === "pizza" && (
         <div>
-          <h2 className="text-lg font-bold mb-4">Інгредієнти</h2>
+          <h2 className="text-lg font-bold mb-4">{t("filterIngredients")}</h2>
           <div className="space-y-6">
             <div className="space-y-3">
               <h3 className="font-semibold text-sm text-muted-foreground">
-                М'ясні
+                {t("filterMeat")}
               </h3>
               {ALL_INGREDIENTS_LIST.filter((i) => i.category === "meat").map(
                 (ingredient) => (
@@ -110,7 +112,7 @@ export function CategoryFilters({ category, locale }: CategoryFiltersProps) {
 
             <div className="space-y-3">
               <h3 className="font-semibold text-sm text-muted-foreground">
-                Сири
+                {t("filterCheese")}
               </h3>
               {ALL_INGREDIENTS_LIST.filter((i) => i.category === "cheese").map(
                 (ingredient) => (
@@ -145,7 +147,7 @@ export function CategoryFilters({ category, locale }: CategoryFiltersProps) {
       {hasActiveFilters && (
         <Button variant="destructive" className="w-full" onClick={resetFilters}>
           <X className="w-4 h-4 mr-2" />
-          Скинути фільтри
+          {t("resetFilters")}
         </Button>
       )}
     </div>
@@ -165,7 +167,7 @@ export function CategoryFilters({ category, locale }: CategoryFiltersProps) {
               className="w-full flex items-center justify-center gap-2"
             >
               <Filter className="w-4 h-4" />
-              Фільтри та сортування
+              {t("filtersButton")}
               {currentIngredients.length > 0 && (
                 <span className="bg-primary text-primary-foreground text-[10px] rounded-full w-5 h-5 flex items-center justify-center ml-1">
                   {currentIngredients.length}
@@ -178,7 +180,7 @@ export function CategoryFilters({ category, locale }: CategoryFiltersProps) {
             className="w-[300px] sm:w-[400px] overflow-y-auto"
           >
             <SheetHeader className="mb-6 text-left">
-              <SheetTitle>Налаштування</SheetTitle>
+              <SheetTitle>{t("filtersTitle")}</SheetTitle>
             </SheetHeader>
             <FilterContent />
           </SheetContent>

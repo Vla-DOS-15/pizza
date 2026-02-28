@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -19,6 +20,7 @@ interface AuthModalProps {
 
 export function AuthModal({ isOpen, onClose, defaultView = "login" }: AuthModalProps) {
   const router = useRouter();
+  const t = useTranslations("Auth");
   const [view, setView] = useState<"login" | "register">(defaultView);
   
   const [loginPhone, setLoginPhone] = useState("");
@@ -50,7 +52,7 @@ export function AuthModal({ isOpen, onClose, defaultView = "login" }: AuthModalP
     });
 
     if (res?.error) {
-      setError("Невірний телефон або пароль");
+      setError(t("invalidCredentials"));
       setIsLoading(false);
     } else {
       setIsLoading(false);
@@ -76,7 +78,7 @@ export function AuthModal({ isOpen, onClose, defaultView = "login" }: AuthModalP
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.message || "Сталася помилка під час реєстрації");
+        setError(data.message || t("registerError"));
         setIsLoading(false);
       } else {
         const loginRes = await signIn("credentials", {
@@ -86,7 +88,7 @@ export function AuthModal({ isOpen, onClose, defaultView = "login" }: AuthModalP
         });
 
         if (loginRes?.error) {
-          setError("Реєстрація успішна, але не вдалося увійти автоматично");
+          setError(t("autoLoginError"));
           setIsLoading(false);
         } else {
           setIsLoading(false);
@@ -95,7 +97,7 @@ export function AuthModal({ isOpen, onClose, defaultView = "login" }: AuthModalP
         }
       }
     } catch (err) {
-      setError("Внутрішня помилка сервера. Спробуйте пізніше.");
+      setError(t("serverError"));
       setIsLoading(false);
     }
   };
@@ -112,7 +114,7 @@ export function AuthModal({ isOpen, onClose, defaultView = "login" }: AuthModalP
       <DialogContent className="sm:max-w-md w-[95vw] rounded-3xl p-6 border-border shadow-sm">
         <DialogHeader>
           <DialogTitle className="text-2xl font-extrabold text-center mb-2 mt-4">
-            {view === "login" ? "Вхід в акаунт" : "Реєстрація"}
+            {view === "login" ? t("loginTitle") : t("registerTitle")}
           </DialogTitle>
         </DialogHeader>
 
@@ -126,27 +128,27 @@ export function AuthModal({ isOpen, onClose, defaultView = "login" }: AuthModalP
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-1">
-                Номер телефону
+                {t("phoneLabel")}
               </label>
               <input
                 required
                 type="tel"
                 value={loginPhone}
                 onChange={(e) => setLoginPhone(e.target.value)}
-                placeholder="+380 (XX) XXX-XX-XX"
+                placeholder={t("phonePlaceholder")}
                 className="w-full border-border bg-background text-foreground rounded-xl p-3 border outline-ring focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-1">
-                Пароль
+                {t("passwordLabel")}
               </label>
               <input
                 required
                 type="password"
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder={t("passwordLoginPlaceholder")}
                 className="w-full border-border bg-background text-foreground rounded-xl p-3 border outline-ring focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
             </div>
@@ -156,17 +158,17 @@ export function AuthModal({ isOpen, onClose, defaultView = "login" }: AuthModalP
               className="w-full rounded-full h-12 text-lg mt-4"
               disabled={isLoading}
             >
-              {isLoading ? "Завантаження..." : "Увійти"}
+              {isLoading ? t("loginLoading") : t("loginButton")}
             </Button>
 
             <div className="mt-4 text-center text-sm text-muted-foreground font-medium">
-              Ще немає акаунту?{" "}
+              {t("noAccount")}{" "}
               <button
                 type="button"
                 onClick={() => switchView("register")}
                 className="text-primary font-bold hover:underline"
               >
-                Зареєструватися
+                {t("registerButton")}
               </button>
             </div>
           </form>
@@ -174,40 +176,40 @@ export function AuthModal({ isOpen, onClose, defaultView = "login" }: AuthModalP
           <form onSubmit={handleRegister} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-1">
-                Ім'я
+                {t("nameLabel")}
               </label>
               <input
                 required
                 type="text"
                 value={registerName}
                 onChange={(e) => setRegisterName(e.target.value)}
-                placeholder="Ваше ім'я"
+                placeholder={t("namePlaceholder")}
                 className="w-full border-border bg-background text-foreground rounded-xl p-3 border outline-ring focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-1">
-                Номер телефону
+                {t("phoneLabel")}
               </label>
               <input
                 required
                 type="tel"
                 value={registerPhone}
                 onChange={(e) => setRegisterPhone(e.target.value)}
-                placeholder="+380 (XX) XXX-XX-XX"
+                placeholder={t("phonePlaceholder")}
                 className="w-full border-border bg-background text-foreground rounded-xl p-3 border outline-ring focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-1">
-                Пароль
+                {t("passwordLabel")}
               </label>
               <input
                 required
                 type="password"
                 value={registerPassword}
                 onChange={(e) => setRegisterPassword(e.target.value)}
-                placeholder="Створіть надійний пароль"
+                placeholder={t("passwordRegisterPlaceholder")}
                 minLength={6}
                 className="w-full border-border bg-background text-foreground rounded-xl p-3 border outline-ring focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
               />
@@ -218,17 +220,17 @@ export function AuthModal({ isOpen, onClose, defaultView = "login" }: AuthModalP
               className="w-full rounded-full h-12 text-lg mt-4"
               disabled={isLoading}
             >
-              {isLoading ? "Створення акаунту..." : "Зареєструватися"}
+              {isLoading ? t("registerLoading") : t("registerButton")}
             </Button>
 
             <div className="mt-4 text-center text-sm text-muted-foreground font-medium">
-              Вже маєте акаунт?{" "}
+              {t("hasAccount")}{" "}
               <button
                 type="button"
                 onClick={() => switchView("login")}
                 className="text-primary font-bold hover:underline"
               >
-                Увійти
+                {t("loginButton")}
               </button>
             </div>
           </form>

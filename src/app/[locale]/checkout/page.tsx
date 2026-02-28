@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ChevronLeft, CheckCircle2 } from "lucide-react";
 import { useCartStore } from "@/store/cart";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ export default function CheckoutPage() {
 
   const locale = useLocale();
   const lang = locale as "uk" | "en";
+  const t = useTranslations("Checkout");
 
   const {
     items,
@@ -55,16 +56,15 @@ export default function CheckoutPage() {
       <div className="min-h-[70vh] flex flex-col items-center justify-center p-4">
         <CheckCircle2 className="w-24 h-24 text-primary mb-6 animate-in zoom-in" />
         <h1 className="text-4xl font-extrabold mb-4 text-center">
-          Замовлення прийнято!
+          {t("successTitle")}
         </h1>
         <p className="text-muted-foreground text-lg mb-8 text-center max-w-md">
-          Дякуємо, {name}! Ваше замовлення успішно оформлено. Ми доставимо його
-          за адресою: <br />
+          {t("successText1")} {name} {t("successText2")} <br />
           <span className="font-medium text-foreground">{address}</span>
         </p>
         <Link href="/">
           <Button size="lg" className="rounded-full px-8 text-lg">
-            Повернутися на головну
+            {t("backToHome")}
           </Button>
         </Link>
       </div>
@@ -87,7 +87,7 @@ export default function CheckoutPage() {
         >
           <ChevronLeft className="w-6 h-6" />
         </Button>
-        <h1 className="text-3xl font-extrabold">Оформлення замовлення</h1>
+        <h1 className="text-3xl font-extrabold">{t("title")}</h1>
       </div>
 
       <div className="flex flex-col md:flex-row gap-8">
@@ -95,12 +95,12 @@ export default function CheckoutPage() {
           onSubmit={handleSubmit}
           className="w-full md:w-2/3 space-y-6 bg-card p-6 md:p-8 rounded-3xl border border-border shadow-sm"
         >
-          <h2 className="text-xl font-bold mb-4">Контактні дані</h2>
+          <h2 className="text-xl font-bold mb-4">{t("contactDetails")}</h2>
 
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-1">
-                Ім'я
+                {t("nameLabel")}
               </label>
               <input
                 required
@@ -114,7 +114,7 @@ export default function CheckoutPage() {
 
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-1">
-                Номер телефону
+                {t("phoneLabel")}
               </label>
               <input
                 required
@@ -128,7 +128,7 @@ export default function CheckoutPage() {
 
             <div>
               <label className="block text-sm font-medium text-muted-foreground mb-1">
-                Адреса доставки
+                {t("addressLabel")}
               </label>
               <input
                 required
@@ -147,14 +147,14 @@ export default function CheckoutPage() {
               size="lg"
               className="w-full rounded-full text-lg h-14 shadow-lg shadow-primary/25"
             >
-              Підтвердити замовлення
+              {t("confirmOrder")}
             </Button>
           </div>
         </form>
 
         <div className="w-full md:w-1/3">
           <div className="bg-card rounded-3xl p-6 border border-border shadow-sm sticky top-24">
-            <h3 className="text-lg font-bold mb-4">У кошику</h3>
+            <h3 className="text-lg font-bold mb-4">{t("inCart")}</h3>
             <div className="space-y-3 mb-6 max-h-[300px] overflow-y-auto pr-2">
               {items.map((item) => (
                 <div
@@ -171,7 +171,7 @@ export default function CheckoutPage() {
               ))}
             </div>
             <div className="border-t border-border pt-4 flex justify-between items-center">
-              <span className="font-bold">До сплати:</span>
+              <span className="font-bold">{t("total")}</span>
               <span className="text-2xl font-black text-primary">
                 {totalAmount} ₴
               </span>

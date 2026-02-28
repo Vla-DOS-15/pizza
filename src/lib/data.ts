@@ -155,7 +155,7 @@ export const PRODUCTS: Product[] = [
       uk: "Ситна піца з куркою, салямі, беконом та подвійним сиром на томатній основі.",
       en: "Hearty pizza with chicken, salami, bacon, and double cheese on a tomato base.",
     },
-    imageUrl: "/images/pizza-meat.png",
+    imageUrl: "/images/pizza/pizza-meat.png",
     variations: [
       { size: 30, price: 285, weight: 580 },
       { size: 40, price: 380, weight: 890 },
@@ -185,7 +185,7 @@ export const PRODUCTS: Product[] = [
       uk: "Класична піца з великою кількістю пікантної пепероні та тягучою моцарелою.",
       en: "Classic pizza with lots of spicy pepperoni and stretchy mozzarella.",
     },
-    imageUrl: "/images/pizza-pepperoni.png",
+    imageUrl: "/images/pizza/pizza-pepperoni.png",
     variations: [
       { size: 30, price: 250, weight: 520 },
       { size: 40, price: 340, weight: 800 },
@@ -213,7 +213,7 @@ export const PRODUCTS: Product[] = [
       uk: "Ідеальне поєднання моцарели, чедеру, пармезану та благородного дорблю на вершковій основі.",
       en: "Perfect blend of mozzarella, cheddar, parmesan, and noble blue cheese on a creamy base.",
     },
-    imageUrl: "/images/pizza-4cheese.png",
+    imageUrl: "/images/pizza/pizza-4cheese.png",
     variations: [
       { size: 30, price: 295, weight: 490 },
       { size: 40, price: 395, weight: 750 },
@@ -242,7 +242,7 @@ export const PRODUCTS: Product[] = [
       uk: "Тропічна класика: ніжна шинка, солодкі ананаси та моцарела.",
       en: "Tropical classic: tender ham, sweet pineapples, and mozzarella.",
     },
-    imageUrl: "/images/pizza-hawaiian.png",
+    imageUrl: "/images/pizza/pizza-hawaiian.png",
     variations: [
       { size: 30, price: 260, weight: 540 },
       { size: 40, price: 350, weight: 820 },
@@ -271,7 +271,7 @@ export const PRODUCTS: Product[] = [
       uk: "Насичений смак завдяки соусу барбекю, курці, бекону та кримській цибулі.",
       en: "Rich flavor thanks to BBQ sauce, chicken, bacon, and red onions.",
     },
-    imageUrl: "/images/pizza-bbq.png",
+    imageUrl: "/images/pizza/pizza-bbq.png",
     variations: [
       { size: 30, price: 275, weight: 560 },
       { size: 40, price: 365, weight: 850 },
@@ -302,7 +302,7 @@ export const PRODUCTS: Product[] = [
       uk: "Соковита яловича котлета, сир чедер, свіжі томати, мариновані огірки та фірмовий соус.",
       en: "Juicy beef patty, cheddar cheese, fresh tomatoes, pickles, and signature sauce.",
     },
-    imageUrl: "/images/burger-cheese.png",
+    imageUrl: "/images/burger/burger-cheese.png",
     price: 185,
   },
   {
@@ -313,7 +313,7 @@ export const PRODUCTS: Product[] = [
       uk: "Для тих, хто дуже голодний: дві яловичі котлети та подвійна порція сиру чедер.",
       en: "For the very hungry: two beef patties and a double portion of cheddar cheese.",
     },
-    imageUrl: "/images/burger-double.png",
+    imageUrl: "/images/burger/burger-double.png",
     price: 245,
   },
   {
@@ -324,7 +324,7 @@ export const PRODUCTS: Product[] = [
       uk: "Хрустка куряча котлета, свіжий салат, томати та ніжний часниковий соус.",
       en: "Crispy chicken patty, fresh lettuce, tomatoes, and tender garlic sauce.",
     },
-    imageUrl: "/images/burger-chicken.png",
+    imageUrl: "/images/burger/burger-chicken.png",
     price: 175,
   },
   {
@@ -335,7 +335,7 @@ export const PRODUCTS: Product[] = [
       uk: "Яловича котлета, хрусткий бекон, цибулеві кільця, чедер та насичений соус BBQ.",
       en: "Beef patty, crispy bacon, onion rings, cheddar, and rich BBQ sauce.",
     },
-    imageUrl: "/images/burger-bbq.png",
+    imageUrl: "/images/burger/burger-bbq.png",
     price: 215,
   },
 
@@ -347,7 +347,7 @@ export const PRODUCTS: Product[] = [
       uk: "Ніжне куряче філе в хрусткій золотистій паніровці.",
       en: "Tender chicken fillet in crispy golden breading.",
     },
-    imageUrl: "/images/nuggets.png",
+    imageUrl: "/images/nuggets/nuggets.png",
     price: 95,
   },
   {
@@ -358,7 +358,7 @@ export const PRODUCTS: Product[] = [
       uk: "Більше нагетсів для тебе та друзів.",
       en: "More nuggets for you and your friends.",
     },
-    imageUrl: "/images/nuggets-large.png",
+    imageUrl: "/images/nuggets/nuggets-large.png",
     price: 135,
   },
   {
@@ -369,7 +369,7 @@ export const PRODUCTS: Product[] = [
       uk: "Хрусткі кульки з розплавленим сиром та пікантним перцем халапеньйо.",
       en: "Crispy balls with melted cheese and spicy jalapeno pepper.",
     },
-    imageUrl: "/images/cheese-balls.png",
+    imageUrl: "/images/nuggets/cheese-balls.png",
     price: 125,
   },
   {
@@ -380,7 +380,7 @@ export const PRODUCTS: Product[] = [
       uk: "Класична, хрустка зовні та м'яка всередині. Ідеально підходить до бургерів.",
       en: "Classic, crispy on the outside and soft inside. Perfect with burgers.",
     },
-    imageUrl: "/images/fries.png",
+    imageUrl: "/images/nuggets/fries.png",
     price: 75,
   },
 
@@ -392,7 +392,7 @@ export const PRODUCTS: Product[] = [
       uk: "Класичний освіжаючий напій.",
       en: "Classic refreshing drink.",
     },
-    imageUrl: "/images/cola.png",
+    imageUrl: "/images/drinks/cola.png",
     variations: [
       { volume: 0.33, price: 35 },
       { volume: 0.5, price: 45 },
@@ -407,7 +407,7 @@ export const PRODUCTS: Product[] = [
       uk: "Освіжаючий лимонно-лаймовий смак.",
       en: "Refreshing lemon-lime flavor.",
     },
-    imageUrl: "/images/sprite.png",
+    imageUrl: "/images/drinks/sprite.png",
     variations: [
       { volume: 0.33, price: 35 },
       { volume: 0.5, price: 45 },
@@ -422,7 +422,7 @@ export const PRODUCTS: Product[] = [
       uk: "100% апельсиновий сік без додавання цукру.",
       en: "100% orange juice with no added sugar.",
     },
-    imageUrl: "/images/juice.png",
+    imageUrl: "/images/drinks/juice.png",
     variations: [
       { volume: 0.5, price: 55 },
       { volume: 1.0, price: 95 },
@@ -436,7 +436,7 @@ export const PRODUCTS: Product[] = [
       uk: "Чиста питна вода для втамування спраги.",
       en: "Pure drinking water to quench your thirst.",
     },
-    imageUrl: "/images/water.png",
+    imageUrl: "/images/drinks/water.png",
     variations: [
       { volume: 0.5, price: 30 },
       { volume: 1.5, price: 45 },

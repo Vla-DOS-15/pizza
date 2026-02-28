@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import {
@@ -15,7 +16,7 @@ import { useCartStore } from "@/store/cart";
 import { Button } from "@/components/ui/button";
 
 export default function CartPage() {
-  const t = useTranslations("Navigation");
+  const t = useTranslations("Cart");
 
   const locale = useLocale();
   const lang = locale as "uk" | "en";
@@ -45,7 +46,7 @@ export default function CartPage() {
           </Link>
           <h1 className="text-3xl font-extrabold flex items-center gap-3">
             <ShoppingBag className="w-8 h-8 text-primary" />
-            {lang === "uk" ? "Твій кошик" : "Your Cart"}
+            {t("title")}
           </h1>
         </div>
 
@@ -55,7 +56,7 @@ export default function CartPage() {
             className="text-muted-foreground hover:text-destructive"
             onClick={clearCart}
           >
-            {lang === "uk" ? "Очистити" : "Clear all"}
+            {t("clearAll")}
           </Button>
         )}
       </div>
@@ -66,16 +67,14 @@ export default function CartPage() {
             <ShoppingCart className="w-12 h-12 text-muted-foreground/50" />
           </div>
           <h2 className="text-2xl font-bold mb-2">
-            {lang === "uk" ? "Кошик порожній" : "Cart is empty"}
+            {t("emptyTitle")}
           </h2>
           <p className="text-muted-foreground mb-8 text-center max-w-md">
-            {lang === "uk"
-              ? "Схоже, ти ще не обрав нічого смачненького. Повертайся до меню та додай піцу!"
-              : "Looks like you haven't chosen anything tasty yet. Go back to the menu and add a pizza!"}
+            {t("emptyText")}
           </p>
           <Link href="/">
             <Button size="lg" className="rounded-full px-8 text-lg">
-              {lang === "uk" ? "Перейти до меню" : "Go to menu"}
+              {t("goToMenu")}
             </Button>
           </Link>
         </div>
@@ -87,10 +86,13 @@ export default function CartPage() {
                 key={item.cartItemId}
                 className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 bg-card rounded-2xl border border-border shadow-sm"
               >
-                <div className="w-24 h-24 sm:w-20 sm:h-20 bg-muted/30 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-xs text-muted-foreground text-center line-clamp-2 px-2">
-                    {item.product.imageUrl}
-                  </span>
+                <div className="relative w-24 h-24 sm:w-20 sm:h-20 bg-muted/30 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden">
+                  <Image 
+                    src={item.product.imageUrl} 
+                    alt={item.product.name[lang]} 
+                    fill 
+                    className="object-contain p-2 drop-shadow-sm" 
+                  />
                 </div>
 
                 <div className="flex-grow">
@@ -99,18 +101,18 @@ export default function CartPage() {
                   </h3>
 
                   <div className="text-sm text-muted-foreground space-y-0.5">
-                    {item.selectedSize && <p>Розмір: {item.selectedSize} см</p>}
+                    {item.selectedSize && <p>{t("size")} {item.selectedSize} см</p>}
                     {item.selectedCrust && (
                       <p>
-                        Тісто:{" "}
-                        {item.selectedCrust === "thin" ? "Тонке" : "Пухке"}
+                        {t("crust")}{" "}
+                        {item.selectedCrust === "thin" ? t("crustThin") : t("crustThick")}
                       </p>
                     )}
                     {item.selectedEdge && item.selectedEdge !== "standard" && (
-                      <p>Бортик: {item.selectedEdge}</p>
+                      <p>{t("edge")} {item.selectedEdge}</p>
                     )}
                     {item.selectedVolume && (
-                      <p>Об'єм: {item.selectedVolume} л</p>
+                      <p>{t("volume")} {item.selectedVolume} л</p>
                     )}
                   </div>
                 </div>
@@ -165,27 +167,27 @@ export default function CartPage() {
           <div className="w-full lg:w-1/3">
             <div className="bg-card rounded-3xl p-6 border border-border shadow-sm sticky top-24">
               <h3 className="text-xl font-bold mb-6">
-                {lang === "uk" ? "Ваше замовлення" : "Order Summary"}
+                {t("summaryTitle")}
               </h3>
 
               <div className="space-y-3 mb-6 text-muted-foreground">
                 <div className="flex justify-between">
-                  <span>{lang === "uk" ? "Сума товарів:" : "Subtotal:"}</span>
+                  <span>{t("subtotal")}</span>
                   <span className="text-foreground font-medium">
                     {totalAmount} ₴
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span>{lang === "uk" ? "Доставка:" : "Delivery:"}</span>
+                  <span>{t("delivery")}</span>
                   <span className="text-primary font-medium">
-                    {lang === "uk" ? "Безкоштовно" : "Free"}
+                    {t("freeDelivery")}
                   </span>
                 </div>
               </div>
 
               <div className="border-t border-border pt-4 mb-8 flex justify-between items-center">
                 <span className="font-bold text-lg">
-                  {lang === "uk" ? "До сплати:" : "Total:"}
+                  {t("total")}
                 </span>
                 <span className="text-3xl font-black">{totalAmount} ₴</span>
               </div>
@@ -195,7 +197,7 @@ export default function CartPage() {
                   size="lg"
                   className="w-full rounded-full text-lg h-14 shadow-lg shadow-primary/25"
                 >
-                  {lang === "uk" ? "Оформити замовлення" : "Checkout"}
+                  {t("checkout")}
                 </Button>
               </Link>
             </div>
